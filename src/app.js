@@ -459,12 +459,13 @@ document.getElementById('loginForm').addEventListener('submit', async event => {
   errorElement.textContent = '';
 
   const { error } = await supabase.auth.signInWithPassword({
-    email: formData.get('email'),
-    password: formData.get('password')
+    email: String(formData.get('email') || '').trim(),
+    password: String(formData.get('password') || '')
   });
 
   if (error) {
-    errorElement.textContent = 'No se pudo iniciar sesión.';
+    console.error('signInWithPassword failed:', error);
+    errorElement.textContent = error.message || 'No se pudo iniciar sesión.';
   } else {
     event.currentTarget.reset();
   }

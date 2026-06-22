@@ -35,13 +35,13 @@ where email = 'tu-email-admin@dominio.com';
 ```
 
 8. Para desarrollo local, rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key`.
-9. Para GitHub Pages, define `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` como secrets del repo y activa `Settings > Pages` con `GitHub Actions`.
+9. Para GitHub Pages, define `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` como secrets del repo. Si tu repositorio ya usa `SUPABASE_ANON_KEY`, el workflow también lo acepta como fallback. Activa `Settings > Pages` con `GitHub Actions`.
 10. Sube el repo a GitHub.
 
 Si quieres que el repositorio no guarde la URL ni la publishable key, usa estos nombres:
 
 - Supabase Vault: `project_url` y `publishable_key`
-- GitHub Secrets para Pages: `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY`
+- GitHub Secrets para Pages: `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` o `SUPABASE_ANON_KEY`
 
 ## Configuración del frontend
 

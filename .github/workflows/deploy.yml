@@ -34,11 +34,13 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
+          PUBLISHABLE_KEY="${SUPABASE_PUBLISHABLE_KEY:-$SUPABASE_ANON_KEY}"
           cat > public/admin-next-config.js <<EOF
           window.PORRA_ADMIN_NEXT_SUPABASE = window.PORRA_ADMIN_NEXT_SUPABASE || {
             url: "${SUPABASE_URL}",
-            publishableKey: "${SUPABASE_PUBLISHABLE_KEY}"
+            publishableKey: "${PUBLISHABLE_KEY}"
           };
           EOF
 
