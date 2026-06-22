@@ -34,8 +34,14 @@ set is_platform_admin = true
 where email = 'tu-email-admin@dominio.com';
 ```
 
-8. Rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key` del proyecto nuevo.
-9. Sube el repo a GitHub y activa GitHub Pages desde `Settings > Pages` con `GitHub Actions`.
+8. Para desarrollo local, rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key`.
+9. Para GitHub Pages, define `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` como secrets del repo y activa `Settings > Pages` con `GitHub Actions`.
+10. Sube el repo a GitHub.
+
+Si quieres que el repositorio no guarde la URL ni la publishable key, usa estos nombres:
+
+- Supabase Vault: `project_url` y `publishable_key`
+- GitHub Secrets para Pages: `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY`
 
 ## Configuración del frontend
 
@@ -102,6 +108,8 @@ Los tres últimos llaman a las Edge Functions copiadas de la app antigua y escri
 - `as_rankings_cache`
 - `worldcup_results_cache`
 - `as_live_match_cache`
+
+Esos jobs leen `project_url` y `publishable_key` desde Vault, así que no hacen falta valores hardcoded dentro del repositorio.
 
 ## Publicación
 

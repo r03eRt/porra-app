@@ -1,5 +1,17 @@
+create extension if not exists vault;
 create extension if not exists pg_cron;
 create extension if not exists pg_net;
+
+create or replace function public.get_vault_secret(secret_name text)
+returns text
+language sql
+stable
+as $$
+  select decrypted_secret
+  from vault.decrypted_secrets
+  where name = secret_name
+  limit 1;
+$$;
 
 create or replace function public.lock_expired_pools()
 returns void
@@ -37,10 +49,10 @@ select cron.schedule(
   '0 */5 * * *',
   $$
   select net.http_post(
-    url := 'https://pcggsxjjpnjzyhpztkvd.supabase.co/functions/v1/sync-as-rankings',
+    url := (select public.get_vault_secret('project_url') || '/functions/v1/sync-as-rankings'),
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'apikey', 'sb_publishable_gA8uyod9PpPT86iXNhgtDA_fIh_SFQJ'
+      'apikey', (select public.get_vault_secret('publishable_key'))
     ),
     body := '{}'::jsonb
   );
@@ -52,10 +64,10 @@ select cron.schedule(
   '*/2 * * * *',
   $$
   select net.http_post(
-    url := 'https://pcggsxjjpnjzyhpztkvd.supabase.co/functions/v1/sync-worldcup-results',
+    url := (select public.get_vault_secret('project_url') || '/functions/v1/sync-worldcup-results'),
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'apikey', 'sb_publishable_gA8uyod9PpPT86iXNhgtDA_fIh_SFQJ'
+      'apikey', (select public.get_vault_secret('publishable_key'))
     ),
     body := '{}'::jsonb
   );
@@ -67,10 +79,10 @@ select cron.schedule(
   '*/1 * * * *',
   $$
   select net.http_post(
-    url := 'https://pcggsxjjpnjzyhpztkvd.supabase.co/functions/v1/sync-as-live-match',
+    url := (select public.get_vault_secret('project_url') || '/functions/v1/sync-as-live-match'),
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'apikey', 'sb_publishable_gA8uyod9PpPT86iXNhgtDA_fIh_SFQJ'
+      'apikey', (select public.get_vault_secret('publishable_key'))
     ),
     body := '{}'::jsonb
   );

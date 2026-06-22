@@ -32,6 +32,7 @@ La separación recomendada es:
 4. Ejecuta `supabase/seed-current.sql` si quieres el histórico actual ya cargado. Ese seed vacía las tablas del entorno nuevo antes de insertar la snapshot del año presente.
 5. Crea el usuario administrador principal en `Authentication > Users` si no usas ninguna semilla.
 6. Copia la `Project URL` y la `publishable key`.
+7. Si vas a desplegar en GitHub Pages, guarda esos valores como `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en los secrets del repo.
 
 ### Crons heredados
 
@@ -42,6 +43,8 @@ Además del cron de bloqueo de porras, el proyecto nuevo también incorpora los 
 - `sync-as-live-match-every-1m`
 
 Todos se definen en `supabase/cron.sql` y llaman a las Edge Functions copiadas dentro de `supabase/functions/`.
+
+`supabase/cron.sql` lee la URL y la publishable key desde Vault (`project_url` y `publishable_key`), así que el repositorio no necesita guardar esos valores.
 
 ## Paso 2. Ejecutar el esquema base
 
