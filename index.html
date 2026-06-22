@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Porra Admin Next</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <script src="./admin-next-config.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Proyecto independiente</p>
+        <h1>Porra Admin Next</h1>
+        <p class="subtitle">Base de trabajo para montar una porra nueva sin depender del Excel ni de la edición actual.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="exportDraftBtn" type="button" hidden>Exportar borrador</button>
+        <button id="clearDraftBtn" type="button" hidden>Limpiar borrador</button>
+        <button id="logoutBtn" type="button" hidden>Cerrar sesión</button>
+      </div>
+    </header>
+
+    <section id="authPanel" class="panel auth-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Acceso admin</h2>
+          <p class="hint">Apunta este proyecto a un Supabase nuevo usando `public/admin-next-config.js`.</p>
+        </div>
+      </div>
+      <form id="loginForm" class="login-form">
+        <input name="email" type="email" autocomplete="username" placeholder="Email admin" required />
+        <input name="password" type="password" autocomplete="current-password" placeholder="Contraseña" required />
+        <button type="submit">Entrar</button>
+      </form>
+      <p id="loginError" class="error" role="alert"></p>
+    </section>
+
+    <section id="workspace" hidden>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Estado</h2>
+            <p class="hint">Borrador local persistido en este navegador. La siguiente fase es persistirlo entero en Supabase.</p>
+          </div>
+        </div>
+        <div id="summaryCards" class="cards"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Configuración de la porra</h2>
+            <p class="hint">Nombre, edición y reglas de puntuación base.</p>
+          </div>
+        </div>
+        <form id="poolForm" class="form-grid">
+          <label>Nombre de la porra
+            <input name="name" type="text" />
+          </label>
+          <label>Edición del torneo
+            <input name="editionName" type="text" />
+          </label>
+          <label>Cierre de pronósticos
+            <input name="lockAt" type="datetime-local" />
+          </label>
+          <label>Puntos exacto
+            <input name="groupExactPoints" type="number" min="0" step="1" />
+          </label>
+          <label>Puntos signo
+            <input name="groupSignPoints" type="number" min="0" step="1" />
+          </label>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Participantes</h2>
+            <p class="hint">Base de alta de jugadores y administradores de la porra.</p>
+          </div>
+          <button id="addMemberBtn" type="button">Añadir usuario</button>
+        </div>
+        <div id="membersList" class="stack"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Grupos y selecciones</h2>
+            <p class="hint">Configura los grupos y los países que pertenecen a cada uno.</p>
+          </div>
+          <button id="addGroupBtn" type="button">Añadir grupo</button>
+        </div>
+        <div id="groupsList" class="stack"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Mini-porra</h2>
+            <p class="hint">Preguntas, tipo de respuesta y puntos asociados.</p>
+          </div>
+          <button id="addQuestionBtn" type="button">Añadir pregunta</button>
+        </div>
+        <div id="questionsList" class="stack"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Cruces</h2>
+            <p class="hint">Definición base de rondas y slots para la eliminatoria.</p>
+          </div>
+          <button id="addKnockoutStageBtn" type="button">Añadir ronda</button>
+        </div>
+        <div id="knockoutStagesList" class="stack"></div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
