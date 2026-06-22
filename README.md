@@ -39,4 +39,9 @@ Después ejecuta `supabase/setup.sql` en el proyecto nuevo de Supabase y crea tu
 
 ## Publicación
 
-Puedes subir este directorio a un repositorio nuevo y desplegarlo donde quieras como aplicación Vite estática.
+El proyecto está preparado para desplegar en GitHub Pages desde la rama `main`.
+
+1. Sube este directorio a un repositorio nuevo llamado `porra-app`.
+2. En GitHub, activa `Settings > Pages` y selecciona `GitHub Actions`.
+3. Cada push a `main` ejecutará el workflow de `.github/workflows/deploy.yml`.
+4. La URL final será `https://<tu-usuario>.github.io/porra-app/`.
