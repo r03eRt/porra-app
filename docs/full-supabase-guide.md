@@ -29,8 +29,9 @@ La separación recomendada es:
 1. Crea un proyecto nuevo en Supabase.
 2. Desactiva el registro público si quieres altas manuales.
 3. Ejecuta `supabase/seed-demo.sql` si quieres una demo lista para probar.
-4. Crea el usuario administrador principal en `Authentication > Users` si no usas la demo.
-5. Copia la `Project URL` y la `publishable key`.
+4. Ejecuta `supabase/seed-current.sql` si quieres el histórico actual ya cargado. Ese seed vacía las tablas del entorno nuevo antes de insertar la snapshot del año presente.
+5. Crea el usuario administrador principal en `Authentication > Users` si no usas ninguna semilla.
+6. Copia la `Project URL` y la `publishable key`.
 
 ## Paso 2. Ejecutar el esquema base
 

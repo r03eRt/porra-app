@@ -24,8 +24,9 @@ npm run dev
 2. Ejecuta `supabase/setup.sql` en el SQL Editor.
 3. Ejecuta `supabase/cron.sql` si quieres activar el bloqueo automático de porras vencidas.
 4. Ejecuta `supabase/seed-demo.sql` si quieres cargar una porra demo con usuarios de prueba.
-5. Crea el usuario admin en `Authentication > Users` si no usas la semilla demo.
-6. Marca ese usuario como administrador global:
+5. Ejecuta `supabase/seed-current.sql` si quieres cargar el histórico actual de la porra. Ese seed limpia las tablas del entorno nuevo y deja la snapshot del año presente lista para probar.
+6. Si no usas una semilla, crea el usuario admin en `Authentication > Users`.
+7. Marca ese usuario como administrador global:
 
 ```sql
 update public.profiles
@@ -33,8 +34,8 @@ set is_platform_admin = true
 where email = 'tu-email-admin@dominio.com';
 ```
 
-7. Rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key` del proyecto nuevo.
-8. Sube el repo a GitHub y activa GitHub Pages desde `Settings > Pages` con `GitHub Actions`.
+8. Rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key` del proyecto nuevo.
+9. Sube el repo a GitHub y activa GitHub Pages desde `Settings > Pages` con `GitHub Actions`.
 
 ## Configuración del frontend
 
@@ -83,6 +84,8 @@ Si quieres automatizar también caches externas más adelante, lo recomendable e
 - `public/admin-next-config.js`: configuración del proyecto Supabase
 - `supabase/setup.sql`: esquema base completo
 - `supabase/cron.sql`: cron de mantenimiento
+- `supabase/seed-demo.sql`: demo ligera para pruebas rápidas
+- `supabase/seed-current.sql`: snapshot del histórico actual
 - `docs/full-supabase-guide.md`: guía completa de montaje
 
 ## Publicación
