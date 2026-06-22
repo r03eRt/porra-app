@@ -119,7 +119,7 @@ Además, la capa de directo de football-data usa:
 - Edge Function: `sync-football-live`
 - Edge Function de pruebas: `simulate-football-live`
 - Tabla: `football_live_cache`
-- Secret Supabase: `FOOTBALL_DATA_TOKEN` o `API_FOOTBALL_KEY` si ese es el nombre que ya tienes cargado
+- Secret Supabase: `FOOTBALL_DATA_TOKEN`
 
 Esos jobs apuntan al proyecto Supabase nuevo directamente, así que no hace falta meter secretos de Supabase en el repositorio.
 

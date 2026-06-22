@@ -51,7 +51,7 @@ La capa de directo de football-data se apoya en:
 - `supabase/functions/sync-football-live`
 - `supabase/functions/simulate-football-live`
 - `public.football_live_cache`
-- el secreto `FOOTBALL_DATA_TOKEN` en Supabase, con fallback a `API_FOOTBALL_KEY`
+- el secreto `FOOTBALL_DATA_TOKEN` en Supabase
 
 ## Paso 2. Ejecutar el esquema base
 

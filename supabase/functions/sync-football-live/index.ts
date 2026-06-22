@@ -79,11 +79,11 @@ Deno.serve(async req => {
     return jsonResponse({ error: 'Method not allowed' }, { status: 405 });
   }
 
-  const token = Deno.env.get('FOOTBALL_DATA_TOKEN') || Deno.env.get('API_FOOTBALL_KEY');
+  const token = Deno.env.get('FOOTBALL_DATA_TOKEN');
   const supabaseUrl = Deno.env.get('SUPABASE_URL');
   const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
   if (!token || !supabaseUrl || !serviceRoleKey) {
-    return jsonResponse({ error: 'Missing FOOTBALL_DATA_TOKEN/API_FOOTBALL_KEY or Supabase env vars' }, { status: 500 });
+    return jsonResponse({ error: 'Missing FOOTBALL_DATA_TOKEN or Supabase env vars' }, { status: 500 });
   }
 
   const date = todayInTimezone(TZ);
