@@ -23,8 +23,9 @@ npm run dev
 1. Crea un proyecto nuevo en Supabase.
 2. Ejecuta `supabase/setup.sql` en el SQL Editor.
 3. Ejecuta `supabase/cron.sql` si quieres activar el bloqueo automático de porras vencidas.
-4. Crea el usuario admin en `Authentication > Users`.
-5. Marca ese usuario como administrador global:
+4. Ejecuta `supabase/seed-demo.sql` si quieres cargar una porra demo con usuarios de prueba.
+5. Crea el usuario admin en `Authentication > Users` si no usas la semilla demo.
+6. Marca ese usuario como administrador global:
 
 ```sql
 update public.profiles
@@ -32,8 +33,8 @@ set is_platform_admin = true
 where email = 'tu-email-admin@dominio.com';
 ```
 
-6. Rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key` del proyecto nuevo.
-7. Sube el repo a GitHub y activa GitHub Pages desde `Settings > Pages` con `GitHub Actions`.
+7. Rellena `public/admin-next-config.js` con la `Project URL` y la `publishable key` del proyecto nuevo.
+8. Sube el repo a GitHub y activa GitHub Pages desde `Settings > Pages` con `GitHub Actions`.
 
 ## Configuración del frontend
 

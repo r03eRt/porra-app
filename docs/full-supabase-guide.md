@@ -28,8 +28,9 @@ La separación recomendada es:
 
 1. Crea un proyecto nuevo en Supabase.
 2. Desactiva el registro público si quieres altas manuales.
-3. Crea el usuario administrador principal en `Authentication > Users`.
-4. Copia la `Project URL` y la `publishable key`.
+3. Ejecuta `supabase/seed-demo.sql` si quieres una demo lista para probar.
+4. Crea el usuario administrador principal en `Authentication > Users` si no usas la demo.
+5. Copia la `Project URL` y la `publishable key`.
 
 ## Paso 2. Ejecutar el esquema base
 
