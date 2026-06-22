@@ -121,13 +121,16 @@ function render() {
   document.getElementById('exportDraftBtn').hidden = !isLoggedIn;
   document.getElementById('clearDraftBtn').hidden = !isLoggedIn;
   document.getElementById('logoutBtn').hidden = !isLoggedIn;
+  const authStatus = document.getElementById('authStatus');
   const loginError = document.getElementById('loginError');
   const loginButton = document.querySelector('#loginForm button[type="submit"]');
   if (!hasSupabaseConfig) {
+    authStatus.textContent = 'Supabase no está configurado en este despliegue. Si ves esto en GitHub Pages, faltan los secrets del repo.';
     loginError.textContent = 'Configura public/admin-next-config.js con el proyecto Supabase nuevo antes de iniciar sesión.';
     loginButton.disabled = true;
     return;
   }
+  authStatus.textContent = `Supabase conectado: ${new URL(SUPABASE_URL).host}`;
   loginButton.disabled = false;
   if (!isLoggedIn) return;
 
