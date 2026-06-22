@@ -33,6 +33,16 @@ La separación recomendada es:
 5. Crea el usuario administrador principal en `Authentication > Users` si no usas ninguna semilla.
 6. Copia la `Project URL` y la `publishable key`.
 
+### Crons heredados
+
+Además del cron de bloqueo de porras, el proyecto nuevo también incorpora los jobs que la app antigua usaba para refrescar cachés:
+
+- `sync-as-rankings-every-5h`
+- `sync-worldcup-results-every-2m`
+- `sync-as-live-match-every-1m`
+
+Todos se definen en `supabase/cron.sql` y llaman a las Edge Functions copiadas dentro de `supabase/functions/`.
+
 ## Paso 2. Ejecutar el esquema base
 
 Abre el SQL Editor y ejecuta `supabase/setup.sql`.

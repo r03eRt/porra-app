@@ -22,7 +22,7 @@ npm run dev
 
 1. Crea un proyecto nuevo en Supabase.
 2. Ejecuta `supabase/setup.sql` en el SQL Editor.
-3. Ejecuta `supabase/cron.sql` si quieres activar el bloqueo automático de porras vencidas.
+3. Ejecuta `supabase/cron.sql` para activar el bloqueo automático de porras vencidas y los crons heredados de la app antigua.
 4. Ejecuta `supabase/seed-demo.sql` si quieres cargar una porra demo con usuarios de prueba.
 5. Ejecuta `supabase/seed-current.sql` si quieres cargar el histórico actual de la porra. Ese seed limpia las tablas del entorno nuevo y deja la snapshot del año presente lista para probar.
 6. Si no usas una semilla, crea el usuario admin en `Authentication > Users`.
@@ -83,10 +83,25 @@ Si quieres automatizar también caches externas más adelante, lo recomendable e
 - `src/styles.css`: estilos
 - `public/admin-next-config.js`: configuración del proyecto Supabase
 - `supabase/setup.sql`: esquema base completo
-- `supabase/cron.sql`: cron de mantenimiento
+- `supabase/cron.sql`: crons de mantenimiento y caches heredadas
 - `supabase/seed-demo.sql`: demo ligera para pruebas rápidas
 - `supabase/seed-current.sql`: snapshot del histórico actual
 - `docs/full-supabase-guide.md`: guía completa de montaje
+
+## Crons heredados
+
+`supabase/cron.sql` deja programados estos jobs en el proyecto nuevo:
+
+- `lock-expired-pools`: cada 10 minutos
+- `sync-as-rankings-every-5h`: cada 5 horas
+- `sync-worldcup-results-every-2m`: cada 2 minutos
+- `sync-as-live-match-every-1m`: cada 1 minuto
+
+Los tres últimos llaman a las Edge Functions copiadas de la app antigua y escriben en:
+
+- `as_rankings_cache`
+- `worldcup_results_cache`
+- `as_live_match_cache`
 
 ## Publicación
 
