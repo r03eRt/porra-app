@@ -37,3 +37,9 @@ verify_jwt = false
 
 [functions.sync-as-live-match]
 verify_jwt = false
+
+[functions.sync-football-live]
+verify_jwt = false
+
+[functions.simulate-football-live]
+verify_jwt = false

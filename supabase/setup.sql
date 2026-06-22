@@ -571,6 +571,13 @@ create table if not exists public.as_live_match_cache (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.football_live_cache (
+  kind text primary key,
+  payload jsonb not null,
+  source text not null default 'football-data.org',
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.prediction_overrides (
   player_id text not null,
   scope text not null,
@@ -585,6 +592,7 @@ alter table public.mini_results enable row level security;
 alter table public.as_rankings_cache enable row level security;
 alter table public.worldcup_results_cache enable row level security;
 alter table public.as_live_match_cache enable row level security;
+alter table public.football_live_cache enable row level security;
 alter table public.prediction_overrides enable row level security;
 
 revoke all on table public.mini_results from anon, authenticated;
@@ -599,6 +607,9 @@ grant select on table public.worldcup_results_cache to anon, authenticated;
 
 revoke all on table public.as_live_match_cache from anon, authenticated;
 grant select on table public.as_live_match_cache to anon, authenticated;
+
+revoke all on table public.football_live_cache from anon, authenticated;
+grant select on table public.football_live_cache to anon, authenticated;
 
 revoke all on table public.prediction_overrides from anon, authenticated;
 grant select on table public.prediction_overrides to anon, authenticated;
@@ -650,6 +661,13 @@ create policy "World Cup results cache is public"
 drop policy if exists "AS live match cache is public" on public.as_live_match_cache;
 create policy "AS live match cache is public"
   on public.as_live_match_cache
+  for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "Football live cache is public" on public.football_live_cache;
+create policy "Football live cache is public"
+  on public.football_live_cache
   for select
   to anon, authenticated
   using (true);

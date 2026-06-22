@@ -44,7 +44,14 @@ Además del cron de bloqueo de porras, el proyecto nuevo también incorpora los 
 
 Todos se definen en `supabase/cron.sql` y llaman a las Edge Functions copiadas dentro de `supabase/functions/`.
 
-`supabase/cron.sql` lee la URL y la publishable key desde Vault (`project_url` y `publishable_key`), así que el repositorio no necesita guardar esos valores.
+`supabase/cron.sql` llama directamente a las funciones del proyecto nuevo, así que el repositorio no necesita guardar secretos de Supabase para esta parte.
+
+La capa de directo de football-data se apoya en:
+
+- `supabase/functions/sync-football-live`
+- `supabase/functions/simulate-football-live`
+- `public.football_live_cache`
+- el secreto `FOOTBALL_DATA_TOKEN` en Supabase, con fallback a `API_FOOTBALL_KEY`
 
 ## Paso 2. Ejecutar el esquema base
 

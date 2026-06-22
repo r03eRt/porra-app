@@ -73,6 +73,10 @@ La base de datos se define en `supabase/setup.sql` y crea estas piezas:
 - `mini_answers`: respuestas de mini-porra por usuario
 - `knockout_predictions`: pronósticos de cruces por usuario
 - `pool_submissions`: estado de envío de cada bloque
+- `as_rankings_cache`: cache de rankings de AS
+- `worldcup_results_cache`: cache de resultados del Mundial
+- `as_live_match_cache`: cache del directo de AS
+- `football_live_cache`: cache del directo de football-data
 
 ## Crons
 
@@ -102,6 +106,7 @@ Si quieres automatizar también caches externas más adelante, lo recomendable e
 - `sync-as-rankings-every-5h`: cada 5 horas
 - `sync-worldcup-results-every-2m`: cada 2 minutos
 - `sync-as-live-match-every-1m`: cada 1 minuto
+- `sync-football-live-every-2m`: cada 2 minutos
 
 Los tres últimos llaman a las Edge Functions copiadas de la app antigua y escriben en:
 
@@ -109,7 +114,14 @@ Los tres últimos llaman a las Edge Functions copiadas de la app antigua y escri
 - `worldcup_results_cache`
 - `as_live_match_cache`
 
-Esos jobs leen `project_url` y `publishable_key` desde Vault, así que no hacen falta valores hardcoded dentro del repositorio.
+Además, la capa de directo de football-data usa:
+
+- Edge Function: `sync-football-live`
+- Edge Function de pruebas: `simulate-football-live`
+- Tabla: `football_live_cache`
+- Secret Supabase: `FOOTBALL_DATA_TOKEN` o `API_FOOTBALL_KEY` si ese es el nombre que ya tienes cargado
+
+Esos jobs apuntan al proyecto Supabase nuevo directamente, así que no hace falta meter secretos de Supabase en el repositorio.
 
 ## Publicación
 
