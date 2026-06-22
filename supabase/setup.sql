@@ -172,7 +172,12 @@ language plpgsql
 security definer
 set search_path = public
 as $$
+declare
+  is_first_profile boolean;
 begin
+  select not exists (select 1 from public.profiles)
+    into is_first_profile;
+
   insert into public.profiles (id, email, display_name)
   values (
     new.id,
@@ -181,6 +186,13 @@ begin
   )
   on conflict (id) do update
     set email = excluded.email;
+
+  if is_first_profile then
+    update public.profiles
+    set is_platform_admin = true
+    where id = new.id;
+  end if;
+
   return new;
 end;
 $$;
