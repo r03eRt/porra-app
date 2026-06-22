@@ -136,6 +136,14 @@ update public.profiles
 set is_platform_admin = true
 where id = '00000000-0000-0000-0000-000000000001';
 
+-- Admin real: asegura que morgadoluengo@gmail.com es platform admin si ya existe en Auth
+insert into public.profiles (id, email, display_name, is_platform_admin)
+select id, email, coalesce(raw_user_meta_data->>'display_name', 'MORGADO'), true
+from auth.users
+where email = 'morgadoluengo@gmail.com'
+on conflict (id) do update
+  set is_platform_admin = true;
+
 insert into public.pools (
   id, slug, name, edition_name, status, lock_at, group_exact_points, group_sign_points, created_by
 )

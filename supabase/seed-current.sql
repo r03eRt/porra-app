@@ -32,7 +32,7 @@ insert into auth.users (id, aud, role, email, encrypted_password, email_confirme
   ('72000000-0000-0000-0000-000000000009', 'authenticated', 'authenticated', 'roberto@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"ROBERTO"}'::jsonb, false, false, now(), now()),
   ('72000000-0000-0000-0000-000000000010', 'authenticated', 'authenticated', 'salome@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"SALOMÉ"}'::jsonb, false, false, now(), now()),
   ('72000000-0000-0000-0000-000000000011', 'authenticated', 'authenticated', 'dano-cobo@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"DANO COBO"}'::jsonb, false, false, now(), now()),
-  ('72000000-0000-0000-0000-000000000012', 'authenticated', 'authenticated', 'morgado@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"MORGADO"}'::jsonb, false, false, now(), now()),
+  ('72000000-0000-0000-0000-000000000012', 'authenticated', 'authenticated', 'morgadoluengo@gmail.com', crypt('02289149Mm', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"MORGADO"}'::jsonb, false, false, now(), now()),
   ('72000000-0000-0000-0000-000000000013', 'authenticated', 'authenticated', 'gon@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"GON"}'::jsonb, false, false, now(), now()),
   ('72000000-0000-0000-0000-000000000014', 'authenticated', 'authenticated', 'tati@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"TATI"}'::jsonb, false, false, now(), now()),
   ('72000000-0000-0000-0000-000000000015', 'authenticated', 'authenticated', 'javi@porra.app', crypt('Porra2026!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"JAVI"}'::jsonb, false, false, now(), now()),
@@ -63,7 +63,7 @@ insert into auth.identities (id, provider_id, user_id, identity_data, provider, 
   ('82000000-0000-0000-0000-000000000009', 'roberto@porra.app', '72000000-0000-0000-0000-000000000009', '{"sub":"roberto@porra.app","email":"roberto@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
   ('82000000-0000-0000-0000-000000000010', 'salome@porra.app', '72000000-0000-0000-0000-000000000010', '{"sub":"salome@porra.app","email":"salome@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
   ('82000000-0000-0000-0000-000000000011', 'dano-cobo@porra.app', '72000000-0000-0000-0000-000000000011', '{"sub":"dano-cobo@porra.app","email":"dano-cobo@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
-  ('82000000-0000-0000-0000-000000000012', 'morgado@porra.app', '72000000-0000-0000-0000-000000000012', '{"sub":"morgado@porra.app","email":"morgado@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
+  ('82000000-0000-0000-0000-000000000012', 'morgadoluengo@gmail.com', '72000000-0000-0000-0000-000000000012', '{"sub":"morgadoluengo@gmail.com","email":"morgadoluengo@gmail.com","email_verified":true}'::jsonb, 'email', now(), now()),
   ('82000000-0000-0000-0000-000000000013', 'gon@porra.app', '72000000-0000-0000-0000-000000000013', '{"sub":"gon@porra.app","email":"gon@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
   ('82000000-0000-0000-0000-000000000014', 'tati@porra.app', '72000000-0000-0000-0000-000000000014', '{"sub":"tati@porra.app","email":"tati@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
   ('82000000-0000-0000-0000-000000000015', 'javi@porra.app', '72000000-0000-0000-0000-000000000015', '{"sub":"javi@porra.app","email":"javi@porra.app","email_verified":true}'::jsonb, 'email', now(), now()),
@@ -93,7 +93,7 @@ insert into public.profiles (id, email, display_name, is_platform_admin, created
   ('72000000-0000-0000-0000-000000000009', 'roberto@porra.app', 'ROBERTO', false, now(), now()),
   ('72000000-0000-0000-0000-000000000010', 'salome@porra.app', 'SALOMÉ', false, now(), now()),
   ('72000000-0000-0000-0000-000000000011', 'dano-cobo@porra.app', 'DANO COBO', false, now(), now()),
-  ('72000000-0000-0000-0000-000000000012', 'morgado@porra.app', 'MORGADO', true, now(), now()),
+  ('72000000-0000-0000-0000-000000000012', 'morgadoluengo@gmail.com', 'MORGADO', true, now(), now()),
   ('72000000-0000-0000-0000-000000000013', 'gon@porra.app', 'GON', false, now(), now()),
   ('72000000-0000-0000-0000-000000000014', 'tati@porra.app', 'TATI', false, now(), now()),
   ('72000000-0000-0000-0000-000000000015', 'javi@porra.app', 'JAVI', false, now(), now()),
@@ -3846,5 +3846,13 @@ on conflict (pool_id, user_id, section) do update set
   status = excluded.status,
   submitted_at = excluded.submitted_at,
   updated_at = excluded.updated_at;
+
+-- Admin real: asegura que morgadoluengo@gmail.com es platform admin si ya existe en Auth
+insert into public.profiles (id, email, display_name, is_platform_admin)
+select id, email, coalesce(raw_user_meta_data->>'display_name', 'MORGADO'), true
+from auth.users
+where email = 'morgadoluengo@gmail.com'
+on conflict (id) do update
+  set is_platform_admin = true;
 
 commit;

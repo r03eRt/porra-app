@@ -3,3 +3,4 @@ dist/
 .temp/
 supabase/.temp/
 .DS_Store
+public/admin-next-config.js
